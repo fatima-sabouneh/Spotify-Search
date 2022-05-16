@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+body{
+  font-family: sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.HeaderStyle{
+  background-color: #d4d4d4;
+  padding: 15px 45px;
+  border-bottom: 1px solid #444 ;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.afterHeader{
+  margin-top: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.HeaderStyle .title{
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.CenterBox{
+  height: 100%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  position: fixed;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.LoginBox{
+  border-radius: 7px;
+  border: 1px solid #a9a9a9;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  font-size: 30px;
+  width: 40%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.LoginBox:hover{
+  color: #000;
+}
+
+.InputBox{
+  border-radius: 7px;
+  border: 1px solid #a9a9a9;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  font-size: 30px;
+}
+
+
+.SpotifyIcon{
+  float: right;
+  color: #1DB954;
+  font-size: 40px;
+}
+
+.SearchIcon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  font-size: 30px;
+  color: #a9a9a9;
+}
+.SearchIconAfter{
+  position: absolute;
+  top: 0;
+  right: 38%;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  font-size: 30px;
+  color: #a9a9a9;
+}
+
+.card{
+  width: 230px;
+  margin: auto;
+  margin-bottom: 20px!important;
+  border: 1px solid #444;
+  cursor: pointer;
+  max-height: 420px;
+}
+
+.card .card-img-top{
+  border-bottom: 1px solid #e4e4e4;
+}
+.card img{
+  width: 225px;
+  height: 200px;
+  margin: auto;
+}
+
+.rates li{
+  display: inline;
+  color: #ffe234;
+}
+
+.PreviewBtn{
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+}
+
+.PreviewBtn:hover{
+  color: #444;
 }
