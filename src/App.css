@@ -114,3 +114,10 @@ body{
 .PreviewBtn:hover{
   color: #444;
 }
+
+.LoginBtn{
+  background-color: #1DB954;
+  color: white;
+  border-radius: 10px;
+  border: 0;
+}
