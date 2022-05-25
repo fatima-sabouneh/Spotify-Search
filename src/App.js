@@ -6,8 +6,10 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { useParams } from "react-router-dom";
 
 function App() {
+  const CLIENT_ID = "5ee3c9c43db84bd291846a15a11913c5"
   const REDIRECT_URI = "http://localhost:3000/"
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
+  const RESPONSE_TYPE = "token"
 
   const [token, setToken] = useState("")
   const [searchKey, setSearchKey] = useState("")
@@ -15,30 +17,26 @@ function App() {
   const [albums, setAlbums] = useState([])
   const [showArtists, setShowArtists] = useState(true)
   const [albumShow, setAlbumShow] = useState(true);
-  const [loginBox, setLoginBox] = useState(false);
-  const [CLIENT_ID, setCLIENT_ID] = useState('');
-  const [clientSecret, setClientSecret] = useState('');
-  const p = useParams();
+  // const [loginBox, setLoginBox] = useState(false);
+  // const [CLIENT_ID, setCLIENT_ID] = useState('');
+  // const [clientSecret, setClientSecret] = useState('');
+  // const p = useParams();
 
-  var access_token = null;
-  var refresh_token = null;
+  // var access_token = null;
+  // var refresh_token = null;
 
-  function requestAuthorization() {
-    localStorage.setItem("client_id", CLIENT_ID);
-    localStorage.setItem("client_secret", clientSecret); // In a real app you should not expose your client_secret to the user
+  // function requestAuthorization() {
+  //   localStorage.setItem("client_id", CLIENT_ID);
+  //   localStorage.setItem("client_secret", clientSecret); // In a real app you should not expose your client_secret to the user
 
-    let url = AUTH_ENDPOINT;
-    url += "?client_id=" + CLIENT_ID;
-    url += "&response_type=code";
-    url += "&redirect_uri=" + encodeURI(REDIRECT_URI);
-    url += "&show_dialog=true";
-    url += "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
-    window.location.href = url; // Show Spotify's authorization screen
-  }
-
-
-
-
+  //   let url = AUTH_ENDPOINT;
+  //   url += "?client_id=" + CLIENT_ID;
+  //   url += "&response_type=code";
+  //   url += "&redirect_uri=" + encodeURI(REDIRECT_URI);
+  //   url += "&show_dialog=true";
+  //   url += "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
+  //   window.location.href = url; // Show Spotify's authorization screen
+  // }
 
   const searchArtists = async (e) => {
     setShowArtists(false)
@@ -160,66 +158,75 @@ function App() {
 
   }
 
-  function handleAuthorizationResponse() {
-      console.log(this.status)
+  // function handleAuthorizationResponse() {
+  //     console.log(this.status)
 
-    if (this.status == 200) {
-      var data = JSON.parse(this.responseText);
-      setToken(data.access_token)
-      console.log(data);
-      var data = JSON.parse(this.responseText);
-      if (data.access_token != undefined) {
-        access_token = data.access_token;
-        localStorage.setItem("access_token", access_token);
-      }
-      if (data.refresh_token != undefined) {
-        refresh_token = data.refresh_token;
-        localStorage.setItem("refresh_token", refresh_token);
-        localStorage.setItem("token", refresh_token);
+  //   if (this.status == 200) {
+  //     var data = JSON.parse(this.responseText);
+  //     setToken(data.access_token)
+  //     console.log(data);
+  //     var data = JSON.parse(this.responseText);
+  //     if (data.access_token != undefined) {
+  //       access_token = data.access_token;
+  //       localStorage.setItem("access_token", access_token);
+  //     }
+  //     if (data.refresh_token != undefined) {
+  //       refresh_token = data.refresh_token;
+  //       localStorage.setItem("refresh_token", refresh_token);
+  //       localStorage.setItem("token", refresh_token);
 
-      }
-      onPageLoad();
-    }
-    else {
-      console.log(this.responseText);
-    }
-  }
-  function handleRedirect() {
-    let cID = localStorage.getItem("client_id");
-    let cSecret = localStorage.getItem("client_secret");
-    let code = null;
-    const queryString = window.location.search;
-    if (queryString.length > 0) {
-      const urlParams = new URLSearchParams(queryString);
-      code = urlParams.get('code')
-      let body = "grant_type=authorization_code";
-      body += "&code=" + code;
-      body += "&redirect_uri=" + encodeURI(REDIRECT_URI);
-      body += "&client_id=" + cID;
-      body += "&client_secret=" + cSecret;
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://accounts.spotify.com/api/token", true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa(CLIENT_ID + ":" + clientSecret));
-      xhr.send(body);
-      xhr.onload = handleAuthorizationResponse;
-    }
-  }
+  //     }
+  //     onPageLoad();
+  //   }
+  //   else {
+  //     console.log(this.responseText);
+  //   }
+  // }
+  // function handleRedirect() {
+  //   let cID = localStorage.getItem("client_id");
+  //   let cSecret = localStorage.getItem("client_secret");
+  //   let code = null;
+  //   const queryString = window.location.search;
+  //   if (queryString.length > 0) {
+  //     const urlParams = new URLSearchParams(queryString);
+  //     code = urlParams.get('code')
+  //     let body = "grant_type=authorization_code";
+  //     body += "&code=" + code;
+  //     body += "&redirect_uri=" + encodeURI(REDIRECT_URI);
+  //     body += "&client_id=" + cID;
+  //     body += "&client_secret=" + cSecret;
+  //     let xhr = new XMLHttpRequest();
+  //     xhr.open("POST", "https://accounts.spotify.com/api/token", true);
+  //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  //     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(CLIENT_ID + ":" + clientSecret));
+  //     xhr.send(body);
+  //     xhr.onload = handleAuthorizationResponse;
+  //   }
+  // }
 
-  function onPageLoad() {
-    if (window.location.search.length > 0) {
-      handleRedirect();
+  // function onPageLoad() {
+  //   if (window.location.search.length > 0) {
+  //     handleRedirect();
 
-    }
-    else {
-      access_token = localStorage.getItem("access_token");
-    }
-  }
+  //   }
+  //   else {
+  //     access_token = localStorage.getItem("access_token");
+  //   }
+  // }
   useEffect(() => {
-    setCLIENT_ID(localStorage.getItem("client_id"));
-    setClientSecret(localStorage.getItem("client_secret"))
-    setToken(localStorage.getItem("token"))
-    onPageLoad();
+    // setCLIENT_ID(localStorage.getItem("client_id"));
+    // setClientSecret(localStorage.getItem("client_secret"))
+    // setToken(localStorage.getItem("token"))
+    // onPageLoad();
+    const hash = window.location.hash
+    let token = window.localStorage.getItem("tokenSpot")
+
+    if (!token && hash) {
+      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+      window.location.hash = ""
+      window.localStorage.setItem("tokenSpot", token)
+    }
+    setToken(token)
   }, [])
   return (
     <div>
@@ -227,13 +234,13 @@ function App() {
         <label className='title'>Spotify Artist Search</label>
       </header>
       <div>
-        {!token && !loginBox ?
+        {!token ?
           <div className="CenterBox">
-            <button className="LoginBox" onClick={() => { setLoginBox(true) }}>
-              Login <BsSpotify className="SpotifyIcon" /></button>
+            <a className="LoginBox" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
+              Login <BsSpotify className="SpotifyIcon" /></a>
           </div>
           : null}
-        {!token && loginBox ? (
+        {/* {!token? (
           <>
             <div className="CenterBox">
               <div className="row">
@@ -255,7 +262,7 @@ function App() {
               </div>
             </div>
           </>
-        ) : null}
+        ) : null} */}
         {token && showArtists & albumShow ?
           <>
             <form onSubmit={searchArtists}>
