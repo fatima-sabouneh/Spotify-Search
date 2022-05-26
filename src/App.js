@@ -17,6 +17,7 @@ function App() {
   const [albums, setAlbums] = useState([])
   const [showArtists, setShowArtists] = useState(true)
   const [albumShow, setAlbumShow] = useState(true);
+
   // const [loginBox, setLoginBox] = useState(false);
   // const [CLIENT_ID, setCLIENT_ID] = useState('');
   // const [clientSecret, setClientSecret] = useState('');
@@ -173,10 +174,10 @@ function App() {
   //     if (data.refresh_token != undefined) {
   //       refresh_token = data.refresh_token;
   //       localStorage.setItem("refresh_token", refresh_token);
-  //       localStorage.setItem("token", refresh_token);
+  //       localStorage.setItem("tokenSpot", refresh_token);
 
   //     }
-  //     onPageLoad();
+  //     console.log(this.responseText);
   //   }
   //   else {
   //     console.log(this.responseText);
@@ -213,6 +214,7 @@ function App() {
   //     access_token = localStorage.getItem("access_token");
   //   }
   // }
+  
   useEffect(() => {
     // setCLIENT_ID(localStorage.getItem("client_id"));
     // setClientSecret(localStorage.getItem("client_secret"))
@@ -226,6 +228,7 @@ function App() {
       window.location.hash = ""
       window.localStorage.setItem("tokenSpot", token)
     }
+    
     setToken(token)
   }, [])
   return (
